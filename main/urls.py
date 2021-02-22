@@ -8,3 +8,7 @@ from . import views
 urlpatterns = [
     path('', views.main, name='main'),
 ]#+=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+#urlpatterns = [
+#    path('', views.main, name='firstp'),
+#]
