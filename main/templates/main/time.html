@@ -5,42 +5,42 @@
     <head>
         <title>Luminus_web</title>
         <!--<meta name="viewport" content="width=device-width, initial-scale=1"> ???-->
-        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.css' %}"> 
+        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.css' %}">
         <script language="javascript">
           function change(color)
           {
                document.getElementById('led_circle') = color;
           }
-       
+
         </script>
     </head>
     <body>
         <!--navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-navy"> <!--fixed-top-->
         <div class="container">
-            <a class="navbar-brand" href=""><img src="{%static 'starandmoonlogo.png' %}" style="height : 35px;" /></a>
+            <a class="navbar-brand" href="../"><img src="{%static 'starandmoonlogo.png' %}" style="height : 35px;" /></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
-          
+
             <div class="collapse navbar-collapse" id="navbarColor01">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item">           <!--"nav-item active"-->
-                  <a class="nav-link" href="led">LED
+                  <a class="nav-link" href="../led">LED
                     <span class="sr-only">(current)</span> <!--??-->
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="calender">Calender</a>
+                  <a class="nav-link" href="../calender">Calender</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="alarm">Alarm</a>
+                    <a class="nav-link" href="../alarm">Alarm</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="music">Music</a>
+                  <a class="nav-link" href="../music">Music</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="time">Time Off</a>
+                  <a class="nav-link" href="">Time Off</a>
                 </li>
               </ul>
               <!--<form class="form-inline my-2 my-lg-0">
@@ -50,7 +50,7 @@
             </div>
           </div>
           </nav>
-          
+
         <!--title-->
         <div class="container">
           <div class="bs-docs-section">

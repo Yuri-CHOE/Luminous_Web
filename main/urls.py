@@ -7,6 +7,11 @@ from . import views
 
 urlpatterns = [
     path('', views.main, name='main'),
+    path('calender/', views.calender),
+    path('music/', views.music),
+    path('time/', views.time),
+    path('alarm/', views.alarm),
+    path('led/', views.led)
 ]#+=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 #urlpatterns = [
