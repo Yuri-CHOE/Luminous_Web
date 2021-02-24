@@ -5,5 +5,5 @@ from django.http import HttpResponse
 def main(request):
     return render(request,'main/bootexam.html',{})
 
-#def firstp(request):
-#   return render(request,'main/firstp.html',{})
+#def bootexam(request):
+#    return render(request,'main/bootexam.html',{})

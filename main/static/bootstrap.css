@@ -109,18 +109,41 @@ body {
 }
 */
 
+/*transparent*/
 .circle{
+  display: inline-block;
   width: 200px;
   height: 200px;
   background: #fff;
   border-radius: 50%;
 }
 
-.minicircle{
-  width: 100px;
-  height: 100px;
-  background :red;
-  border-radius: 50%;
+.select{
+  display: inline-block;
+  position: absolute;
+  top: 99px;
+  left: 350px;
+  width: 700px;
+  height: 545px;
+  border-width: 8px;
+  border-style: solid;
+  border-color: #034488;
+  border-radius: 0.6rem;
+}
+
+.slc_ul{
+  display: block;
+  width: 700px;
+  list-style-type: none;
+  margin: 0;
+  padding: 3px 7px;
+}
+
+.slc_li{
+  display: inline-block;
+  text-align: center;
+  margin: 0;
+  padding: 12px 27px;
 }
 
 hr {
@@ -2565,8 +2588,8 @@ textarea.form-control {
 .btn {
   display: inline-block;
   font-weight: 400;
-  color: #888;
   text-align: center;
+  color: #888;
   vertical-align: middle;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -2579,6 +2602,36 @@ textarea.form-control {
   line-height: 1.5;
   border-radius: 0.4rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+/*버튼 모양*/
+.btn-circle{
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  font-weight: 400;
+  color: #888;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 50%;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn-img{
+  border: none;
+  background: #fffcf6;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2614,6 +2667,48 @@ fieldset:disabled a.btn {
   color: #fff;
   background-color: red;
   border-color: red;
+}
+
+.btn-red:hover {
+  color: #fff;
+  background-color:#ff7851;
+  border-color: #ff7851;
+}
+
+.btn-pink {
+  color: #fff;
+  background-color: rgb(255, 181, 209);
+  border-color: rgb(255, 181, 209);
+}
+
+.btn-pink:hover {
+  color: #fff;
+  background-color:#ff7851;
+  border-color: #ff7851;
+}
+
+.btn-orange {
+  color: #fff;
+  background-color: rgb(255, 123, 0);
+  border-color: rgb(255, 123, 0);
+}
+
+.btn-orange:hover {
+  color: #fff;
+  background-color:#ff7851;
+  border-color: #ff7851;
+}
+
+.btn-blue {
+  color: #fff;
+  background-color: red;
+  border-color: red;
+}
+
+.btn-blue:hover {
+  color: #fff;
+  background-color:#ff7851;
+  border-color: #ff7851;
 }
 
 .btn-primary {
@@ -5343,9 +5438,9 @@ a.badge-dark:focus, a.badge-dark.focus {
 }
 
 .jumbotron {
-  padding: 2rem 1rem; /*??*/
+  padding: 2rem 1rem;
   margin-bottom: 2rem;
-  background-color: #f7f7f9; /*#fffcf6 으로 추후 수정*/
+  background-color: #fffcf6;
   border-radius: 0.6rem;
 }
 

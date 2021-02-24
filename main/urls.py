@@ -10,5 +10,5 @@ urlpatterns = [
 ]#+=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 #urlpatterns = [
-#    path('', views.main, name='firstp'),
+#    path('', views.bootexam, name='bootexam')
 #]
