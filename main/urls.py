@@ -7,8 +7,6 @@ from . import views
 
 urlpatterns = [
     path('', views.main, name='main'),
+    path('bootexam/', views.bootexam, name='bootexam'),
+    path('status/', views.status, name='status')
 ]#+=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
-#urlpatterns = [
-#    path('', views.bootexam, name='bootexam')
-#]
