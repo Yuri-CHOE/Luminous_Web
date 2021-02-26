@@ -5,8 +5,13 @@ from django.shortcuts import redirect
 def main(request):
     return render(request,'main/main.html')
 
-def bootexam(request):
-    return render(request,'main/bootexam.html')
-
-def status(request):
-    return render(request,'main/status.html')
+def led(request):
+    return render(request,'main/led.html',{})
+def calender(request):
+    return render(request,'main/calender.html',{})
+def alarm(request):
+    return render(request,'main/alarm.html',{})
+def music(request):
+    return render(request,'main/music.html',{})
+def time(request):
+    return render(request,'main/time.html',{})
