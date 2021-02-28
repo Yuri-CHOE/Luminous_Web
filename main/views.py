@@ -5,6 +5,8 @@ from django.shortcuts import redirect
 def main(request):
     return render(request,'main/main.html')
 
+def status(request):
+    return render(request,'main/status.html',{})
 def led(request):
     return render(request,'main/led.html',{})
 def calender(request):
