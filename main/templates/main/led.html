@@ -6,11 +6,22 @@
         <title>Luminus_web</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.css' %}">
-        <script language="javascript">
-          var circle =document.getElementsByClassName('circle');
-          function change(color)
-          {
-            circle.style.backgroundColor=color
+        <script>
+          function change(color,text){
+            var circle = document.getElementById("cir");            //classname으로 했더니 안되고 id로 지정하니 됨
+            circle.style.backgroundColor = color;
+  
+            txt.innerHTML= text;
+          }
+
+          function onoff() {                                        //led onoff 버튼
+            var click = document.getElementById("onimg");           //onoffbutton과 글자가 match하면 off로 변경 
+            if(click.src.match("onoffbutton")){
+              click.src = "../../../static/offbutton.png";
+            }
+            else{
+              click.src= "../../../static/onoffbutton.png";
+            }
           }
         </script>
     </head>
@@ -62,22 +73,22 @@
                 <!--LED-->
                 <div class="bs-component">
                   <div class="jumbotron">
-                    <div class="circle"></div>
-                    <p class="lead">#fff</p>
+                    <div class="circle" id="cir" style="background-color: #fff;"></div>
+                    <p class="lead" id="txt">#fff</p>
                     <!--오른쪽 색상 버튼-->
                     <div class="select">
                       <div class="col-lg-7">
                         <p class="bs-component">
                           <ul class="slc_ul">
-                            <li class="slc_li"><button type="button" class="btn-circle btn-red" value="red" onclick="change(this.value)"></button><p>red</p></li>
-                            <li class="slc_li"><button type="button" class="btn-circle btn-pink" value="pink" onclick="change(this.value)"></button><p>pink</p></li>
-                            <li class="slc_lii"><button type="button" class="btn-img"><img src="{%static 'onoffbutton.png' %}" style="width:90px"></button></li>
+                            <li class="slc_li"><button type="button" class="btn-circle btn-red" value="red" onclick="change(this.value, 'red')"></button><p>red</p></li>
+                            <li class="slc_li"><button type="button" class="btn-circle btn-pink" value="pink" onclick="change(this.value, 'pink')"></button><p>pink</p></li>
+                            <li class="slc_lii"><button type="button" class="btn-img" onclick="onoff()"><img src="{%static 'offbutton.png' %}" id="onimg" style="width:90px"></button></li>
                           </ul>
                           <ul class="slc_ul">
-                            <li class="slc_li"><button type="button" class="btn-circle btn-orange"></button><p>orange</p></li>
-                            <li class="slc_li"><button type="button" class="btn-circle btn-yellow"></button><p>yellow</p></li>
-                            <li class="slc_li"><button type="button" class="btn-circle btn-primary"></button><p>green</p></li>
-                            <li class="slc_li"><button type="button" class="btn-circle btn-primary"></button><p>mint</p></li>
+                            <li class="slc_li"><button type="button" class="btn-circle btn-orange" value="orange" onclick="change(this.value, 'orange')"></button><p>orange</p></li>
+                            <li class="slc_li"><button type="button" class="btn-circle btn-yellow" value="yellow" onclick="change(this.value, 'yellow')"></button><p>yellow</p></li>
+                            <li class="slc_li"><button type="button" class="btn-circle btn-primary" value="green" onclick="change(this.value, 'green')"></button><p>green</p></li>
+                            <li class="slc_li"><button type="button" class="btn-circle btn-primary" value="mint" onclick="change(this.value, 'mint')"></button><p>mint</p></li>
                           </ul>
                           <ul class="slc_ul">
                             <li class="slc_li"><button type="button" class="btn-circle btn-blue"></button><p>blue</p></li>

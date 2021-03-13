@@ -77,12 +77,11 @@ body {
   outline: 0 !important;
 }
 
-/*transparent*/
 .circle{
   display: inline-block;
+  margin-top: -35px;
   width: 200px;
   height: 200px;
-  background: #fff;
   border-style: solid;
   border-color: #034488;
   border-radius: 50%;
@@ -126,12 +125,110 @@ body {
 }
 
 .page-header{
-  padding: 80px 0 0 85px;
+  padding: 100px 0 20px 89px;
 }
 
 .calender{
   margin: 10px 90px;
 }
+
+.plus{
+  display: inline-block;
+  position: absolute;
+  top: 100px;
+  right: 70px;
+  font-size: 60px;
+}
+
+.plusbtn{
+  width: 50px;
+  border: none;
+  background: none;
+  color:#034488;
+}
+
+/*팝업*/
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 100px;
+}
+
+.pop-layer .pop-container {
+  padding: 20px 25px;
+}
+
+.pop-layer p.ctxt {
+  color: #666;
+  line-height: 25px;
+}
+
+.pop-layer .btn-r {
+  width: 100%;
+  margin: 10px 0 20px;
+  padding-top: 10px;
+  border-top: 1px solid #DDD;
+  text-align: right;
+}
+
+.pop-layer {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 410px;
+  height: auto;
+  background-color: #fff;
+  border: 5px solid #3571B5;
+  z-index: 10;
+}
+
+.dim-layer {
+  display: none;
+  position: fixed;
+  _position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+}
+
+.dim-layer .dimBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: .5;
+  filter: alpha(opacity=50);
+}
+
+.dim-layer .pop-layer {
+  display: block;
+}
+
+a.btn-layerClose {
+  display: inline-block;
+  height: 25px;
+  padding: 0 14px 0;
+  border: 1px solid #304a8a;
+  background-color: #3f5a9d;
+  font-size: 13px;
+  color: #fff;
+  line-height: 25px;
+}
+
+a.btn-layerClose:hover {
+  border: 1px solid #091940;
+  background-color: #1f326a;
+  color: #fff;
+}
+/**/
 
 hr {
   box-sizing: content-box;
@@ -455,7 +552,8 @@ h6, .h6 {
 .lead {
   font-size: 2rem; /*1.25rem이었음*/
   font-weight: 400; /*300이었음*/
-  margin-left: 60px;
+  position: absolute; left: 12.5%; 
+  transform: translateX(-50%);     /*IE9이상 그 외 부라우저에서만 적용, IE9은 -ms-사용*/
 }
 
 .display-1 {
@@ -2225,6 +2323,12 @@ textarea.form-control {
 }
 
 .form-group {
+  display: inline;
+  position: absolute;
+  top: 238px;
+  right: 180px;
+  font-size: 25px;
+  margin-right: 10px;
   margin-bottom: 1rem;
 }
 
@@ -3955,7 +4059,9 @@ input[type="button"].btn-block {
 }
 
 .custom-control {
-  position: relative;
+  position: absolute;
+  top: 7px;
+  left: 200px;
   z-index: 1;
   display: block;
   min-height: 1.5rem;
@@ -5475,8 +5581,20 @@ a.badge-dark:focus, a.badge-dark.focus {
 .jumbotron {
   padding: 2rem 1rem;
   margin-bottom: 2rem;
-  background-color: #121416;
+  background-color: #fffcf6;
   border-radius: 0.6rem;
+}
+
+.jumbotron2 {
+  padding: 0.5rem 1rem;
+  margin-left: 40px; /*수정 필요*/
+  margin-right: 40px;
+  margin-bottom: 2rem;
+  background-color: #fffcf6;
+  border-radius: 0.6rem;
+  border-width: 8px;
+  border-style: solid;
+  border-color: #034488;
 }
 
 @media (min-width: 576px) {
