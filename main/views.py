@@ -17,3 +17,9 @@ def music(request):
     return render(request,'main/music.html',{})
 def time(request):
     return render(request,'main/time.html',{})
+def one(request):
+    return render(request,'main/1.html',{})
+def two(request):
+    return render(request,'main/2.html',{})
+def th(request):
+    return render(request,'main/3.html',{})
