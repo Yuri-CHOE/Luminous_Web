@@ -6,29 +6,81 @@
         <title>Luminus_web</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.css' %}">
-        <script language="javascript">
+        <script>
+          var i=0;
+          function plus(){
+            //새로운 div생성, array +1
+            var ALARM_NUMBER=5;
+            var alarmclock=new Array(ALARM_NUMBER);
+            i++;
+            alarmclock[i]=new Alarm();
+          }
+
+          //시 설정 함수
+          var hour=0;
+          function timeh_up(){
+            if(hour==24) hour=0;
+            else hour++;
+            hour=addZeros(hour,2);
+            document.getElementById("hour").innerHTML = hour;
+          }
+          function timeh_down(){
+            if(hour==0) hour=24;
+            else hour=hour-1;
+            hour=addZeros(hour,2);
+            document.getElementById("hour").innerHTML = hour;
+          }
+          //분(십의 자리) 설정 함수
+          var minutet=0;
+          function timemt_up(){
+            if(minutet==5) minutet=00;
+            else minutet=minutet+1;
+            document.getElementById("minuteten").innerHTML = minutet;      
+          }
+          function timemt_down(){
+            if(minutet==00) minutet=5;
+            else minutet=minutet-1;
+            document.getElementById("minuteten").innerHTML = minutet;
+          }
+          //분(일의 자리) 설정 함수
+          var minute=0;
+          function timem_up(){
+            if(minute==9) minute=00;
+            else minute=minute+1;
+            document.getElementById("minute").innerHTML = minute;      
+          }
+          function timem_down(){
+            if(minute==00) minute=9;
+            else minute=minute-1;
+            document.getElementById("minute").innerHTML = minute;      
+          }
+
+          var sethour=0;
+          var setminute=0;
+          function save(){
+            sethour=hour;
+            setminute=(10*minutet)+minute;
+            printClock();
+            Close();
+          }
 
           function printClock() {
-              
               var clock = document.getElementById("clock");            // 출력할 장소 선택
-              var currentDate = new Date();                                     // 현재시간
-              var calendar = currentDate.getFullYear() + "-" + (currentDate.getMonth()+1) + "-" + currentDate.getDate() // 현재 날짜
+              var clock2 = document.getElementById("clock2");
+              var clock3 = document.getElementById("clock3");
               var amPm = 'AM'; // 초기값 AM
-              var currentHours = addZeros(currentDate.getHours(),2); 
-              var currentMinute = addZeros(currentDate.getMinutes() ,2);
-              var currentSeconds =  addZeros(currentDate.getSeconds(),2);
+              sethour = addZeros(sethour,2);
+              setminute = addZeros(setminute,2);
               
-              if(currentHours >= 12){ // 시간이 12보다 클 때 PM으로 세팅, 12를 빼줌
+              if(sethour >= 12){ // 시간이 12보다 클 때 PM으로 세팅, 12를 빼줌
                 amPm = 'PM';
-                currentHours = addZeros(currentHours - 12,2);
+                sethour = addZeros(sethour - 12,2);
               }
-          
-              if(currentSeconds >= 50){// 50초 이상일 때 색을 변환해 준다.
-                 currentSeconds = '<span style="color:#de1951;">'+currentSeconds+'</span>'
-              }
-              clock.innerHTML = currentHours+":"+currentMinute+":"+currentSeconds +" <span style='font-size:50px;'>"+ amPm+"</span>"; //날짜를 출력해 줌
               
-              setTimeout("printClock()",1000);         // 1초마다 printClock() 함수 호출
+
+              clock.innerHTML = sethour+":"+setminute +" <span style='font-size:50px;'>"+ amPm+"</span>"; //날짜를 출력해 줌
+              clock2.innerHTML = sethour+":"+setminute +" <span style='font-size:50px;'>"+ amPm+"</span>"; //날짜를 출력해 줌
+              clock3.innerHTML = sethour+":"+setminute +" <span style='font-size:50px;'>"+ amPm+"</span>";
           }
           
           function addZeros(num, digit) { // 자릿수 맞춰주기
@@ -41,44 +93,252 @@
               }
               return zero + num;
           }
-          //팝업
-          $('.btn-example').click(function(){
-              var $href = $(this).attr('href');
-              layer_popup($href);
-          });
-          function layer_popup(el){
+          //
 
-              var $el = $(el);    //레이어의 id를 $el 변수에 저장
-              var isDim = $el.prev().hasClass('dimBg'); //dimmed 레이어를 감지하기 위한 boolean 변수
-
-              isDim ? $('.dim-layer').fadeIn() : $el.fadeIn();
-
-              var $elWidth = ~~($el.outerWidth()),
-                  $elHeight = ~~($el.outerHeight()),
-                  docWidth = $(document).width(),
-                  docHeight = $(document).height();
-
-              // 화면의 중앙에 레이어를 띄운다.
-              if ($elHeight < docHeight || $elWidth < docWidth) {
-                  $el.css({
-                      marginTop: -$elHeight /2,
-                      marginLeft: -$elWidth/2
-                  })
-              } else {
-                  $el.css({top: 0, left: 0});
-              }
-
-              $el.find('a.btn-layerClose').click(function(){
-                  isDim ? $('.dim-layer').fadeOut() : $el.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
-                  return false;
-              });
-
-              $('.layer .dimBg').click(function(){
-                  $('.dim-layer').fadeOut();
-                  return false;
-              });
-
+          function Alarm(){
+            
           }
+
+          
+          function dArray(rows, columns) {
+          var arr = new Array(rows);
+          for (var i = 0; i < rows; i++) {
+              arr[i] = new Array(columns);
+          }
+          return arr;
+          }
+          var setday = dArray(3, 5);
+          function day(d){
+            switch(d){
+              case "sun" : 
+                if(setday[0][0]==0){
+                    document.getElementById("sun").style.color='#888';
+                    setday[0][0]=-1;
+                }
+                else {
+                  document.getElementById("sun").style.color='#034488';
+                  setday[0][0]=0;
+                }
+                break;
+              case "mon" : 
+                if(setday[0][1]==1){
+                    document.getElementById("mon").style.color='#888';
+                    setday[0][1]=-1;
+                }
+                else {
+                  document.getElementById("mon").style.color='#034488';
+                  setday[0][1]=1;
+                }
+                break;
+              case "tue" : 
+                if(setday[0][2]==2){
+                    document.getElementById("tue").style.color='#888';
+                    setday[0][2]=-1;
+                }
+                else {
+                  document.getElementById("tue").style.color='#034488';
+                  setday[0][2]=2;
+                }
+                break;
+              case "wed" : 
+                if(setday[0][3]==3){
+                    document.getElementById("wed").style.color='#888';
+                    setday[0][3]=-1;
+                }
+                else {
+                  document.getElementById("wed").style.color='#034488';
+                  setday[0][3]=3;
+                }
+                break;
+              case "thu" : 
+               if(setday[0][4]==4){
+                    document.getElementById("thu").style.color='#888';
+                    setday[0][4]=-1;
+                }
+                else {
+                  document.getElementById("thu").style.color='#034488';
+                  setday[0][4]=4;
+                }
+                break;
+              case "fri" : 
+                if(setday[0][5]==5){
+                    document.getElementById("fri").style.color='#888';
+                    setday[0][5]=-1;
+                }
+                else {
+                  document.getElementById("fri").style.color='#034488';
+                  setday[0][5]=5;
+                }
+                break;
+              case "sat" :
+                if(setday[0][6]==6){
+                    document.getElementById("sat").style.color='#888';
+                    setday[0][6]=-1;
+                }
+                else {
+                  document.getElementById("sat").style.color='#034488';
+                  setday[0][6]=6;
+                }
+                break;
+
+                //2
+                case "sun2" : 
+                if(setday[1][0]==0){
+                    document.getElementById("sun2").style.color='#888';
+                    setday[1][0]=-1;
+                }
+                else {
+                  document.getElementById("sun2").style.color='#034488';
+                  setday[1][0]=0;
+                }
+                break;
+              case "mon2" : 
+                if(setday[1][1]==1){
+                    document.getElementById("mon2").style.color='#888';
+                    setday[1][1]=-1;
+                }
+                else {
+                  document.getElementById("mon2").style.color='#034488';
+                  setday[1][1]=1;
+                }
+                break;
+              case "tue2" : 
+                if(setday[1][2]==2){
+                    document.getElementById("tue2").style.color='#888';
+                    setday[1][2]=-1;
+                }
+                else {
+                  document.getElementById("tue2").style.color='#034488';
+                  setday[1][2]=2;
+                }
+                break;
+              case "wed2" : 
+                if(setday[1][3]==3){
+                    document.getElementById("wed2").style.color='#888';
+                    setday[1][3]=-1;
+                }
+                else {
+                  document.getElementById("wed2").style.color='#034488';
+                  setday[1][3]=3;
+                }
+                break;
+              case "thu2" : 
+               if(setday[1][4]==4){
+                    document.getElementById("thu2").style.color='#888';
+                    setday[1][4]=-1;
+                }
+                else {
+                  document.getElementById("thu2").style.color='#034488';
+                  setday[1][4]=4;
+                }
+                break;
+              case "fri2" : 
+                if(setday[1][5]==5){
+                    document.getElementById("fri2").style.color='#888';
+                    setday[1][5]=-1;
+                }
+                else {
+                  document.getElementById("fri2").style.color='#034488';
+                  setday[1][5]=5;
+                }
+                break;
+              case "sat2" :
+                if(setday[1][6]==6){
+                    document.getElementById("sat2").style.color='#888';
+                    setday[1][6]=-1;
+                }
+                else {
+                  document.getElementById("sat2").style.color='#034488';
+                  setday[1][6]=6;
+                }
+                break;
+
+                //3
+              case "sun3" : 
+                if(setday[2][0]==0){
+                    document.getElementById("sun3").style.color='#888';
+                    setday[2][0]=-1;
+                }
+                else {
+                  document.getElementById("sun3").style.color='#034488';
+                  setday[2][0]=0;
+                }
+                break;
+              case "mon3" : 
+                if(setday[2][1]==1){
+                    document.getElementById("mon3").style.color='#888';
+                    setday[2][1]=-1;
+                }
+                else {
+                  document.getElementById("mon3").style.color='#034488';
+                  setday[2][1]=1;
+                }
+                break;
+              case "tue3" : 
+                if(setday[2][2]==2){
+                    document.getElementById("tue3").style.color='#888';
+                    setday[2][2]=-1;
+                }
+                else {
+                  document.getElementById("tue3").style.color='#034488';
+                  setday[2][2]=2;
+                }
+                break;
+              case "wed3" : 
+                if(setday[2][3]==3){
+                    document.getElementById("wed3").style.color='#888';
+                    setday[2][3]=-1;
+                }
+                else {
+                  document.getElementById("wed3").style.color='#034488';
+                  setday[2][3]=3;
+                }
+                break;
+              case "thu3" : 
+                if(setday[2][4]==4){
+                    document.getElementById("thu3").style.color='#888';
+                    setday[2][4]=-1;
+                }
+                else {
+                  document.getElementById("thu3").style.color='#034488';
+                  setday[2][4]=4;
+                }
+                break;
+              case "fri3" : 
+                if(setday[2][5]==5){
+                    document.getElementById("fri3").style.color='#888';
+                    setday[2][5]=-1;
+                }
+                else {
+                  document.getElementById("fri3").style.color='#034488';
+                  setday[2][5]=5;
+                }
+                break;
+              case "sat3" :
+                if(setday[2][6]==6){
+                    document.getElementById("sat3").style.color='#888';
+                    setday[2][6]=-1;
+                }
+                else {
+                  document.getElementById("sat3").style.color='#034488';
+                  setday[2][6]=6;
+                }
+                break;
+            }
+          }
+        
+
+          //팝업창
+          function Show(name){
+              document.getElementById(name).style.display='inline';
+          }
+
+            function Close(){
+              document.getElementById("pop").style.display='none';
+              //document.getElementById("pop2").style.display='none';
+              //document.getElementById("pop3").style.display='none';
+            }
+
           </script>
     </head>
     <body onload="printClock()">
@@ -110,10 +370,6 @@
                   <a class="nav-link" href="../time">Time Off</a>
                 </li>
               </ul>
-              <!--<form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-              </form>-->
             </div>
           </div>
           </nav>
@@ -129,41 +385,184 @@
                     <button class="plusbtn">+</button>
                   </div>
                     <div class="jumbotron2">
-                      <div class="clk_range" style=" width: 886px; height: 130px; border-style: solid; border-color: skyblue;">
+                      <div class="clk_range" id="clk" onclick="Show('pop')" style=" width: 886px; height: 130px; cursor: pointer; border-color: rgb(252, 0, 0); border-style: solid;">
                       <div style="color:#034488; font-size:70px; text-align:left; margin-top: 9px;  block-size: 135px;" id="clock"> </div>
                       </div>
-                      <div class="form-group" style="border-color: slategrey; border-style: solid;">
-                        월&nbsp;&nbsp;화&nbsp;&nbsp;수&nbsp;&nbsp;목&nbsp;&nbsp;금
+                      <div class="form-group" style="border-color: lawngreen; border-style: solid;">
+                        <ul id="setday">
+                          <li id="sun">일</li>&nbsp;&nbsp;
+                          <li id="mon">월</li>&nbsp;&nbsp;
+                          <li id="tue">화</li>&nbsp;&nbsp;
+                          <li id="wed">수</li>&nbsp;&nbsp;
+                          <li id="thu">목</li>&nbsp;&nbsp;
+                          <li id="fri">금</li>&nbsp;&nbsp;
+                          <li id="sat">토</li>&nbsp;&nbsp;
+                        </ul>
                         <div class="custom-control custom-switch">
                           <input type="checkbox" class="custom-control custom-switch custom-control-input" id="customSwitch1" checked="">
                           <label class="custom-control-label" for="customSwitch1"></label>
                         </div>
                       </div>
                     </div>
+
+                    <div class="jumbotron2">
+                      <div class="clk_range2" id="clk2" onclick="Show('pop2')" style=" width: 886px; height: 130px; cursor: pointer; border-color: rgb(252, 0, 0); border-style: solid;">
+                      <div style="color:#034488; font-size:70px; text-align:left; margin-top: 9px;  block-size: 135px;" id="clock2"> </div>
+                      </div>
+                      <div class="form-group2" style="border-color: lawngreen; border-style: solid;">
+                        <ul id="setday">
+                          <li id="sun2">일</li>&nbsp;&nbsp;
+                          <li id="mon2">월</li>&nbsp;&nbsp;
+                          <li id="tue2">화</li>&nbsp;&nbsp;
+                          <li id="wed2">수</li>&nbsp;&nbsp;
+                          <li id="thu2">목</li>&nbsp;&nbsp;
+                          <li id="fri2">금</li>&nbsp;&nbsp;
+                          <li id="sat2">토</li>&nbsp;&nbsp;
+                        </ul>
+                        <div class="custom-control2 custom-switch">
+                          <input type="checkbox" class="custom-control2 custom-switch custom-control-input" id="customSwitch2" checked="">
+                          <label class="custom-control-label" for="customSwitch2"></label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="jumbotron2">
+                      <div class="clk_range3" id="clk3" onclick="Show('pop3')" style=" width: 886px; height: 130px; cursor: pointer; border-color: rgb(252, 0, 0); border-style: solid;">
+                      <div style="color:#034488; font-size:70px; text-align:left; margin-top: 9px;  block-size: 135px;" id="clock3"> </div>
+                      </div>
+                      <div class="form-group3" style="border-color: lawngreen; border-style: solid;">
+                        <ul id="setday">
+                          <li id="sun3">일&nbsp;&nbsp;</li>
+                          <li id="mon3">월&nbsp;&nbsp;</li>
+                          <li id="tue3">화&nbsp;&nbsp;</li>
+                          <li id="wed3">수&nbsp;&nbsp;</li>
+                          <li id="thu3">목&nbsp;&nbsp;</li>
+                          <li id="fri3">금&nbsp;&nbsp;</li>
+                          <li id="sat3">토&nbsp;&nbsp;</li>
+                        </ul>
+                        <div class="custom-control3 custom-switch">
+                          <input type="checkbox" class="custom-control3 custom-switch custom-control-input" id="customSwitch3" checked="">
+                          <label class="custom-control-label" for="customSwitch3"></label>
+                        </div>
+                      </div>
+                    </div>
+
                   </div>
               </div>
             </div>
           </div>
         </div>
         <!--레이어 팝업-->
-        <div style="height: 300px;"></div>
-        <a href="#layer1" class="btn-example">일반 팝업레이어</a>
-        <div id="layer1" class="pop-layer">
-          <div class="pop-container">
-            <div class="pop-conts">
-                <!--content //-->
-                <p class="ctxt mb20">Thank you.<br>
-                    Your registration was submitted successfully.<br>
-                    Selected invitees will be notified by e-mail on JANUARY 24th.<br><br>
-                    Hope to see you soon!
-                </p>
-
-                <div class="btn-r">
-                  <a href="#" class="btn-layerClose">Close</a>
-                </div>
-            <!--// content-->
+        <div id="pop">
+          <div style="color: #034488; font-weight: 500; font-size: 45px; cursor: pointer; text-align: right; margin: 5px 20px;" onclick="Close()">x</div>
+          <table class="ctable">
+            <tr>
+              <td onclick="timeh_up()" style="cursor: pointer;">▲</td>
+              <td></td>
+              <td onclick="timemt_up()" style="cursor: pointer; ">▲</td>
+              <td onclick="timem_up()" style="cursor: pointer;">▲</td>
+            </tr>
+            <tr>
+              <td id="hour">00</td>
+              <td>:</td>
+              <td id="minuteten">0</td>
+              <td id="minute">0</td>
+            </tr>
+            <tr>
+              <td onclick="timeh_down()" style="cursor: pointer;">▼</td>
+              <td></td>
+              <td onclick="timemt_down()" style="cursor: pointer;">▼</td>
+              <td onclick="timem_down()" style="cursor: pointer;" >▼</td>
+            </tr>
+          </table>
+          <div>
+            <ul id="setday">
+              <li id="sun"><button type="checkbox" class="daystyle btn-day" value="sun" onclick="day(this.value)">일</button></li>&nbsp;&nbsp;&nbsp;
+              <li id="mon"><button type="checkbox" class="daystyle btn-day" value="mon" onclick="day(this.value)">월</button></li>&nbsp;&nbsp;&nbsp;
+              <li id="tue"><button type="checkbox" class="daystyle btn-day" value="tue" onclick="day(this.value)">화</button></li>&nbsp;&nbsp;&nbsp;
+              <li id="wed"><button type="checkbox" class="daystyle btn-day" value="wed" onclick="day(this.value)">수</button></li>&nbsp;&nbsp;&nbsp;
+              <li id="thu"><button type="checkbox" class="daystyle btn-day" value="thu" onclick="day(this.value)">목</button></li>&nbsp;&nbsp;&nbsp;
+              <li id="fri"><button type="checkbox" class="daystyle btn-day" value="fri" onclick="day(this.value)">금</button></li>&nbsp;&nbsp;&nbsp;
+              <li id="sat"><button type="checkbox" class="daystyle btn-day" value="sat" onclick="day(this.value)">토</button></li>&nbsp;&nbsp;&nbsp;
+            </ul>
+          <div>
+            <div id="close" onclick='save()' style="color: #034488; font-weight: 500; width: 100px; margin: auto; font-size: 30px; cursor:pointer;">save</div>
           </div>
         </div>
-      </div>
+        <!--2-->
+        <div id="pop2">
+          <div style="color: #034488; font-weight: 500; font-size: 45px; cursor: pointer; text-align: right; margin: 5px 20px;" onclick="Close()">x</div>
+          <table class="ctable">
+            <tr>
+              <td onclick="timeh_up()" style="cursor: pointer;">▲</td>
+              <td></td>
+              <td onclick="timemt_up()" style="cursor: pointer; ">▲</td>
+              <td onclick="timem_up()" style="cursor: pointer;">▲</td>
+            </tr>
+            <tr>
+              <td id="hour">00</td>
+              <td>:</td>
+              <td id="minuteten">0</td>
+              <td id="minute">0</td>
+            </tr>
+            <tr>
+              <td onclick="timeh_down()" style="cursor: pointer;">▼</td>
+              <td></td>
+              <td onclick="timemt_down()" style="cursor: pointer;">▼</td>
+              <td onclick="timem_down()" style="cursor: pointer;" >▼</td>
+            </tr>
+          </table>
+          <div>
+            <ul id="setday">
+              <li id="sun"><button type="checkbox" class="daystyle btn-day" value="sun2" onclick="day(this.value)">일</button></li>&nbsp;&nbsp;&nbsp;
+              <li id="mon"><button type="checkbox" class="daystyle btn-day" value="mon2" onclick="day(this.value)">월</button></li>&nbsp;&nbsp;&nbsp;
+              <li id="tue"><button type="checkbox" class="daystyle btn-day" value="tue2" onclick="day(this.value)">화</button></li>&nbsp;&nbsp;&nbsp;
+              <li id="wed"><button type="checkbox" class="daystyle btn-day" value="wed2" onclick="day(this.value)">수</button></li>&nbsp;&nbsp;&nbsp;
+              <li id="thu"><button type="checkbox" class="daystyle btn-day" value="thu2" onclick="day(this.value)">목</button></li>&nbsp;&nbsp;&nbsp;
+              <li id="fri"><button type="checkbox" class="daystyle btn-day" value="fri2" onclick="day(this.value)">금</button></li>&nbsp;&nbsp;&nbsp;
+              <li id="sat"><button type="checkbox" class="daystyle btn-day" value="sat2" onclick="day(this.value)">토</button></li>&nbsp;&nbsp;&nbsp;
+            </ul>
+          <div>
+            <div id="close" onclick='save()' style="color: #034488; font-weight: 500; width: 100px; margin: auto; font-size: 30px; cursor:pointer;">save</div>
+          </div>
+        </div>
+
+        <!--3-->
+        <div id="pop3">
+          <div style="color: #034488; font-weight: 500; font-size: 45px; cursor: pointer; text-align: right; margin: 5px 20px;" onclick="Close()">x</div>
+          <table class="ctable">
+            <tr>
+              <td onclick="timeh_up()" style="cursor: pointer;">▲</td>
+              <td></td>
+              <td onclick="timemt_up()" style="cursor: pointer; ">▲</td>
+              <td onclick="timem_up()" style="cursor: pointer;">▲</td>
+            </tr>
+            <tr>
+              <td id="hour">00</td>
+              <td>:</td>
+              <td id="minuteten">0</td>
+              <td id="minute">0</td>
+            </tr>
+            <tr>
+              <td onclick="timeh_down()" style="cursor: pointer;">▼</td>
+              <td></td>
+              <td onclick="timemt_down()" style="cursor: pointer;">▼</td>
+              <td onclick="timem_down()" style="cursor: pointer;" >▼</td>
+            </tr>
+          </table>
+          <div>
+            <ul id="setday">
+              <li id="sun"><button type="checkbox" class="daystyle btn-day" value="sun3" onclick="day(this.value)">일</button></li>&nbsp;&nbsp;&nbsp;
+              <li id="mon"><button type="checkbox" class="daystyle btn-day" value="mon3" onclick="day(this.value)">월</button></li>&nbsp;&nbsp;&nbsp;
+              <li id="tue"><button type="checkbox" class="daystyle btn-day" value="tue3" onclick="day(this.value)">화</button></li>&nbsp;&nbsp;&nbsp;
+              <li id="wed"><button type="checkbox" class="daystyle btn-day" value="wed3" onclick="day(this.value)">수</button></li>&nbsp;&nbsp;&nbsp;
+              <li id="thu"><button type="checkbox" class="daystyle btn-day" value="thu3" onclick="day(this.value)">목</button></li>&nbsp;&nbsp;&nbsp;
+              <li id="fri"><button type="checkbox" class="daystyle btn-day" value="fri3" onclick="day(this.value)">금</button></li>&nbsp;&nbsp;&nbsp;
+              <li id="sat"><button type="checkbox" class="daystyle btn-day" value="sat3" onclick="day(this.value)">토</button></li>&nbsp;&nbsp;&nbsp;
+            </ul>
+          <div>
+            <div id="close" onclick='save()' style="color: #034488; font-weight: 500; width: 100px; margin: auto; font-size: 30px; cursor:pointer;">save</div>
+          </div>
+        </div>
     </body>
 </html>
