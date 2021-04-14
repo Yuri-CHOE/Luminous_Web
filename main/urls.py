@@ -12,5 +12,9 @@ urlpatterns = [
     path('music/', views.music),
     path('time/', views.time),
     path('alarm/', views.alarm),
-    path('led/', views.led)
+    path('led/', views.led),
+    path('1/', views.one),
+    path('2/', views.two),
+    path('3/', views.th)
+
 ]#+=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
