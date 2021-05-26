@@ -1,33 +1,6 @@
 {% load static %}
 <!doctype html>
 <meta charset="utf-8">
- <style>
-      input {
-        vertical-align: middle;
-      }
-
-      input.img-button1 {
-        background: url( "../static/달맞이꽃_아침.png" ) no-repeat;
-        border: none;
-        width: 100px;
-        height: 100px;
-        cursor: pointer;
-      }
-      input.img-button2 {
-        background: url( "../static/달맞이꽃_점심.png" ) no-repeat;
-        border: none;
-        width: 100px;
-        height: 100px;
-        cursor: pointer;
-      }
-      input.img-button3 {
-        background: url( "../static/달맞이꽃_우울.png" ) no-repeat;
-        border: none;
-        width: 100px;
-        height: 100px;
-        cursor: pointer;
-      }
-    </style>
 <html>
     <head>
         <title>Luminus_web</title>
@@ -77,13 +50,10 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="page-header">
-                     <form>
-      <p>
-        <input type="button" class="img-button1" onclick="location.href='../1' ">
-    <input type="button" class="img-button2" onclick="location.href='../2' ">
-    <input type="button" class="img-button3" onclick="location.href='../3' ">
-      </p>
-    </form>
+<button type="button" onclick="location.href='../1' ">밝음</button>
+<button type="button" onclick="location.href='../2' ">신남</button>
+
+<button type="button" onclick="location.href='../3' ">어둡</button>
 
 
 

@@ -4,52 +4,5 @@
   <body bgcolor='#034488'>
     <img src="{%static 'moonandstar.png' %}" 
     style="display: block; margin-left: auto; margin-right: auto; width : 400px" />
-<style>
-      input {
-        vertical-align: middle;
-      }
-
-      input.img-button1 {
-        background: url( "../static/달맞이꽃_아침.png" ) no-repeat;
-        border: none;
-        width: 100px;
-        height: 100px;
-        cursor: pointer;
-      }
-
-    </style>
-
-{% load socialaccount %}
-
-<!-- Modal -->
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Please Log in</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-    <form>
-      <p>
-     <input type="button" class="img-button1" class="fab fa-google" href="{% provider_login_url 'google' %}">
-                          <a role="button" class="img-button1" href="{% provider_login_url 'google' %}"><i class="fab fa-google"></i> Log in with Google</a>
-
-      </p>
-    </form>
-                <a role="button" class="img-button1" href="{% provider_login_url 'google' %}"><i class="fab fa-google"></i> Log in with Google</a>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
   </body>
 </html>
