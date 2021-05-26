@@ -38,6 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -100,7 +105,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+ACCOUNT_EMAIL_REQUIRED = True
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -117,7 +122,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-
+LOGIN_REDIRECT_URL = '/status/'
 import os
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
